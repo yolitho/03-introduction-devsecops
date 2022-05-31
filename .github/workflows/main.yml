@@ -1,0 +1,19 @@
+name: CI/CD pour Atelier 1
+# TODO definir quand lancer la CI/CD
+# Les taches (jobs) à effectuer
+jobs:
+  # Chaque tache est représentée par un serveur, ce qui permet l'indépendance des tâches.
+  # TODO rajouter le test SAST en utilisant l'action 42Crunch/api-security-audit-action
+  build-test: # Tache pour build et test
+    runs-on: ubuntu-latest # Choix de l'OS du serveur pour l'étape 'build-test'
+    steps:
+      - name: "[CI] Build l'environnement en récupérant le repo entier de votre branche."
+        uses: actions/checkout@v2 # Ne pas toucher
+      - name: "[DEBUG] Afficher l'arborescence des fichiers"
+        run: ls -l .
+      - name: "[CI] Initialiser l'environnement Python"
+        run: cd atelier/ && ./init.sh # TODO
+      - name: "[CI] Démarrer le serveur Python"
+        run: cd atelier/ && ./run.sh # TODO
+      - name: "[CI] Tester le serveur Python"
+        run: cd atelier/ && pytest # TODO

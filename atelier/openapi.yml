@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: API Ecoles
+  description: Cette API liste les écoles supérieures de Toulouse.
+  version: "0.2"
+servers:
+  - url: http://localhost:8000/
+    description: Optional server description, e.g. Main (production) server
+paths:
+  /:
+    get:
+      description: Endpoit par défaut qui retourne les informations de l'API
+      responses:
+        '200':    # status code
+          description: Presentation de l'API
+          content:
+            application/json:
+              schema: 
+                type: object
