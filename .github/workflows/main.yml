@@ -1,9 +1,23 @@
 name: CI/CD pour Atelier 1
 # TODO definir quand lancer la CI/CD
+on: 
+  push:
+    branches: [atl1_actif]
 # Les taches (jobs) à effectuer
 jobs:
   # Chaque tache est représentée par un serveur, ce qui permet l'indépendance des tâches.
   # TODO rajouter le test SAST en utilisant l'action 42Crunch/api-security-audit-action
+  security-sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: 42Crunch/api-security-audit-action@v2
+        with:
+          # Please create free account at https://platform.42crunch.com/register
+          # Follow these steps to configure API_TOKEN https://docs.42crunch.com/latest/content/tasks/integrate_github_actions.htm
+          api-token: ${{ secrets.API_TOKEN }}
+          min-score: 85
+
   build-test: # Tache pour build et test
     runs-on: ubuntu-latest # Choix de l'OS du serveur pour l'étape 'build-test'
     steps:
